@@ -7,17 +7,58 @@ import java.util.HashSet;
 public class SubstitutionSolver {
 	private static HashSet<String> dictionary;
 	private static String dictionaryPath = "res/dictionaries";
+	private static String messagePath = "res/messages";
+
+	private static String message;
 
 	public static void main(String[] args){
 		String userSpecified = "";
-		if(args.length > 0){
-			userSpecified = "/" + args[0];
+
+		if(args.length == 0){
+			System.out.println("Need to provide file containing a message to be decrypted");
+			System.exit(1);
+		}
+
+		retrieveMessage(messagePath + "/" + args[0]);
+
+		System.out.println(message);
+
+		if(args.length > 1){
+			userSpecified = "/" + args[1];
 		}
 
 		dictionary = new HashSet<String>();
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
+	}
+
+	//TODO: Add real support for multiline text
+	private static void retrieveMessage(String fileName){
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+			StringBuilder builder = new StringBuilder();
+
+			String line;
+			try{
+				while ((line = br.readLine()) != null) {
+					builder.append(line.toUpperCase());
+				}
+
+				message = builder.toString();
+			}
+			catch(IOException e){
+				System.out.println(e.getMessage());
+				System.exit(1);
+			}
+
+			br.close();
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			System.exit(1);
+		}
 	}
 
 	private static void populateDictionary(File file){
