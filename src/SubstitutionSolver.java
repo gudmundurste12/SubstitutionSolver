@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashSet;
 
 /**
@@ -9,18 +6,24 @@ import java.util.HashSet;
  */
 public class SubstitutionSolver {
 	private static HashSet<String> dictionary;
+	private static String dictionaryPath = "res/dictionaries";
 
 	public static void main(String[] args){
-		dictionary = new HashSet<String>();
-		populateDictionary("res/english3.txt");
+		String userSpecified = "";
+		if(args.length > 0){
+			userSpecified = "/" + args[0];
+		}
 
+		dictionary = new HashSet<String>();
+		populateDictionary(dictionaryPath + "/english3.txt");
+		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
 	}
 
-	private static void populateDictionary(String fileName){
+	private static void populateDictionary(File file){
+		System.out.println("Reading words from " + file.getName());
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(fileName));
-
+			BufferedReader br = new BufferedReader(new FileReader(file));
 			String line;
 			try{
 				while ((line = br.readLine()) != null) {
@@ -38,6 +41,26 @@ public class SubstitutionSolver {
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
+		}
+	}
+
+	private static void populateDictionary(String fileName){
+		populateDictionary(new File(fileName));
+	}
+
+	private static void addUserSpecifiedWords(String dirName){
+		File dir = new File(dirName);
+
+		if(dir.isDirectory()){
+			File[] files = dir.listFiles();
+			for(File f : files){
+				if(f.isFile()) {
+					populateDictionary(f);
+				}
+			}
+		}
+		else{
+			System.out.println(dirName + " is not a directory");
 		}
 	}
 }
