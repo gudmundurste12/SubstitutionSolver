@@ -14,4 +14,8 @@ public class Dictionary {
 	public void add(String s){
 		dictionary.add(s.toLowerCase());
 	}
+
+	public boolean contains(String s){
+		return dictionary.contains(s.toLowerCase());
+	}
 }
