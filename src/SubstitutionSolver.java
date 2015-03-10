@@ -5,7 +5,7 @@ import java.util.HashSet;
  * Created by Gvendurst on 9.3.2015.
  */
 public class SubstitutionSolver {
-	private static HashSet<String> dictionary;
+	private static Dictionary dictionary;
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
 
@@ -27,7 +27,9 @@ public class SubstitutionSolver {
 			userSpecified = "/" + args[1];
 		}
 
-		dictionary = new HashSet<String>();
+		dictionary = new Dictionary();
+		populateDictionary(dictionaryPath + "/enable1.txt");
+		populateDictionary(dictionaryPath + "/english2.txt");
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
@@ -68,7 +70,7 @@ public class SubstitutionSolver {
 			String line;
 			try{
 				while ((line = br.readLine()) != null) {
-					dictionary.add(line.toLowerCase());
+					dictionary.add(line);
 				}
 
 			}
