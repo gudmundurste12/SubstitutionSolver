@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.HashSet;
 
 /**
  * Created by Gvendurst on 9.3.2015.
@@ -8,20 +7,21 @@ public class SubstitutionSolver {
 	private static Dictionary dictionary;
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
+	private static AssignmentSet caesar3;
 
-	private static String message;
+	private static String encryptedMessage;
 
 	public static void main(String[] args){
 		String userSpecified = "";
 
 		if(args.length == 0){
-			System.out.println("Need to provide file containing a message to be decrypted");
+			System.out.println("Need to provide file containing a encryptedMessage to be decrypted");
 			System.exit(1);
 		}
 
 		retrieveMessage(messagePath + "/" + args[0]);
 
-		System.out.println(message);
+		System.out.println(encryptedMessage);
 
 		if(args.length > 1){
 			userSpecified = "/" + args[1];
@@ -33,6 +33,7 @@ public class SubstitutionSolver {
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
+		testAssignmentSet();
 	}
 
 	//TODO: Add real support for multiline text
@@ -48,7 +49,7 @@ public class SubstitutionSolver {
 					builder.append(line.toUpperCase());
 				}
 
-				message = builder.toString();
+				encryptedMessage = builder.toString();
 			}
 			catch(IOException e){
 				System.out.println(e.getMessage());
@@ -104,6 +105,45 @@ public class SubstitutionSolver {
 		}
 		else{
 			System.out.println(dirName + " is not a directory");
+		}
+	}
+
+	private static void testAssignmentSet(){
+		caesar3 = new AssignmentSet();
+		caesar3.addAssignment(new Assignment('D','a'));
+		caesar3.addAssignment(new Assignment('E','b'));
+		caesar3.addAssignment(new Assignment('F','c'));
+		caesar3.addAssignment(new Assignment('G','d'));
+		caesar3.addAssignment(new Assignment('H','e'));
+		caesar3.addAssignment(new Assignment('I','f'));
+		caesar3.addAssignment(new Assignment('J','g'));
+		caesar3.addAssignment(new Assignment('K','h'));
+		caesar3.addAssignment(new Assignment('L','i'));
+		caesar3.addAssignment(new Assignment('M','j'));
+		caesar3.addAssignment(new Assignment('N','k'));
+		caesar3.addAssignment(new Assignment('O','l'));
+		caesar3.addAssignment(new Assignment('P','m'));
+		caesar3.addAssignment(new Assignment('Q','n'));
+		caesar3.addAssignment(new Assignment('R','o'));
+		caesar3.addAssignment(new Assignment('S','p'));
+		caesar3.addAssignment(new Assignment('T','q'));
+		caesar3.addAssignment(new Assignment('U','r'));
+		caesar3.addAssignment(new Assignment('V','s'));
+		caesar3.addAssignment(new Assignment('W','t'));
+		caesar3.addAssignment(new Assignment('X','u'));
+		caesar3.addAssignment(new Assignment('Y','v'));
+		caesar3.addAssignment(new Assignment('Z','w'));
+		caesar3.addAssignment(new Assignment('A','x'));
+		caesar3.addAssignment(new Assignment('B','y'));
+		caesar3.addAssignment(new Assignment('C','z'));
+
+		for(String s : encryptedMessage.split(" ")){
+			try{
+				System.out.print(caesar3.decryptWord(s) + " ");
+			}
+			catch(AssignmentSetException e){
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 }
