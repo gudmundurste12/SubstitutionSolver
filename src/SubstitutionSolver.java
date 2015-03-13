@@ -33,7 +33,7 @@ public class SubstitutionSolver {
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
-		testAssignmentSet();
+
 	}
 
 	//TODO: Add real support for multiline text
@@ -142,7 +142,7 @@ public class SubstitutionSolver {
 				System.out.print(caesar3.decryptWord(s) + " ");
 			}
 			catch(AssignmentSetException e){
-				System.out.println(e.getMessage());
+				System.out.println("\n" + e.getMessage());
 			}
 		}
 	}
