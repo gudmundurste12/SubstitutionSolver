@@ -12,5 +12,18 @@ public class SubstitutionCSP {
 		this.encryptedMessage = encryptedMessage;
 	}
 
+	public Assignment solve(){
 
+		return CSP_Backtracking(new Assignment());
+	}
+
+	public Assignment CSP_Backtracking(Assignment a){
+		if(a.complete()){
+			return a;
+		}
+
+
+
+		return null;
+	}
 }

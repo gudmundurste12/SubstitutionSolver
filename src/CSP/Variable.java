@@ -11,4 +11,13 @@ public class Variable {
 		this.plainLetter = plainLetter;
 		this.domain = new Domain(true);
 	}
+
+	public boolean assign(char plainLetter){
+		if(domain.available(plainLetter)){
+			this.plainLetter = plainLetter;
+			return true;
+		}
+
+		return false;
+	}
 }

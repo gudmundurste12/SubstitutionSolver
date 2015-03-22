@@ -1,6 +1,8 @@
 package CSP;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,5 +40,35 @@ public class Assignment {
 		variables.put('X', new Variable(null));
 		variables.put('Y', new Variable(null));
 		variables.put('Z', new Variable(null));
+	}
+
+	public Variable get(char cipherLetter){
+		return variables.get(cipherLetter);
+	}
+
+	public boolean assign(char cipherLetter, char plainLetter){
+		Variable v = get(cipherLetter);
+		return v.assign(plainLetter);
+	}
+
+	public boolean complete(){
+		for(Variable v : variables.values()){
+			if(v.plainLetter == null){
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public List<Variable> unassignedVariables(){
+		List<Variable> returnValue = new ArrayList<Variable>();
+		for(Variable v : variables.values()){
+			if(v.plainLetter == null){
+				returnValue.add(v);
+			}
+		}
+
+		return returnValue;
 	}
 }
