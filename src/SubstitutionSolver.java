@@ -1,3 +1,6 @@
+import CSP.Dictionary;
+import CSP.SubstitutionCSP;
+
 import java.io.*;
 
 /**
@@ -33,7 +36,7 @@ public class SubstitutionSolver {
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
-
+		SubstitutionCSP csp = new SubstitutionCSP(dictionary, encryptedMessage);
 	}
 
 	//TODO: Add real support for multiline text

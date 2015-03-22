@@ -41,4 +41,19 @@ public class Domain {
 			availability.put('z', new Availability());
 		}
 	}
+
+	public boolean available(char letter){
+		Availability a = availability.get(letter);
+
+		return a.available;
+	}
+
+	public void makeUnavailable(char letter){
+		Availability a = availability.get(letter);
+
+		if(a.available){
+			a.available = false;
+			a.deletedBy = letter;
+		}
+	}
 }

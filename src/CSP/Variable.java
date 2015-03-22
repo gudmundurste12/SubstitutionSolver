@@ -4,10 +4,10 @@ package CSP;
  * Created by Gvendurst on 15.3.2015.
  */
 public class Variable {
-	public char plainLetter;
+	public Character plainLetter;
 	public Domain domain;
 
-	public Variable(char plainLetter){
+	public Variable(Character plainLetter){
 		this.plainLetter = plainLetter;
 		this.domain = new Domain(true);
 	}
