@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class Domain {
 	public Map<Character, Availability> availability;
+	private int domainSize;
 
 	public Domain(boolean autoFill){
 		availability = new HashMap<Character, Availability>();
@@ -39,6 +40,7 @@ public class Domain {
 			availability.put('x', new Availability());
 			availability.put('y', new Availability());
 			availability.put('z', new Availability());
+			domainSize = 26;
 		}
 	}
 
@@ -54,6 +56,11 @@ public class Domain {
 		if(a.available){
 			a.available = false;
 			a.deletedBy = letter;
+			domainSize--;
 		}
+	}
+
+	public int domainSize(){
+		return domainSize;
 	}
 }
