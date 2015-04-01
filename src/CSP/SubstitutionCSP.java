@@ -40,6 +40,13 @@ public class SubstitutionCSP{
 		Variable X = variablesLeft.get(0);
 
 
+		//TODO: Sort the domain using a least-constraining value heuristic
+		for(Character c : X.freeDomain()){
+			X.assign(c);
+
+
+		}
+
 
 
 		return null;
@@ -47,9 +54,20 @@ public class SubstitutionCSP{
 
 	public List<Character> sortDomain(Domain d){
 		List<Character> returnValue = new ArrayList<Character>();
-		
 
 
 		return returnValue;
+	}
+
+	public boolean validAssignment(Assignment a){
+		for(String word : wordsInMessage){
+			if(word != null){
+				if(!dictionary.contains(word)){
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 }

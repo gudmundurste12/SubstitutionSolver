@@ -50,10 +50,10 @@ public class Domain {
 		return a.available;
 	}
 
-	public void makeUnavailable(char letter){
+	public void makeUnavailable(char letter) {
 		Availability a = availability.get(letter);
 
-		if(a.available){
+		if (a.available) {
 			a.available = false;
 			a.deletedBy = letter;
 			domainSize--;
