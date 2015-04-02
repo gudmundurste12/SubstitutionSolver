@@ -50,19 +50,23 @@ public class Domain {
 		return a.available;
 	}
 
-	public void makeUnavailable(char plainLetter) {
+	public void makeUnavailable(char cipherLetter, char plainLetter) {
 		Availability a = availability.get(plainLetter);
 
 		if (a.available) {
 			a.available = false;
-			//TODO: Deleted by should be cipherLetter
-			a.deletedBy = plainLetter;
+			a.deletedBy = cipherLetter;
 			domainSize--;
 		}
 	}
 
-	public void makeAvailable(char plainLetter){
-		availability.get(plainLetter).available = true;
+	public void makeAvailable(char cipherLetter, char plainLetter){
+		Availability av = availability.get(plainLetter);
+		if(av.deletedBy != null){
+			if(av.deletedBy.equals(cipherLetter)){
+				av.available = true;
+			}
+		}
 	}
 
 	public int domainSize(){

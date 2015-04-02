@@ -21,12 +21,32 @@ public class SubstitutionCSP{
 		for(String s : encryptedMessage.split(" ")){
 			wordsInMessage.add(new Word(s));
 		}
+
+		trimWordsInMessage();
+
 		domainSizeComparator = new DomainSizeComparator();
+	}
+
+	private void trimWordsInMessage(){
+		if(wordsInMessage.size() >= 2){
+			List<Word> toBeRemoved = new ArrayList<Word>();
+			for(int i = 1; i < wordsInMessage.size(); i++){
+				for(int j = 0; j < i; j++){
+					if(wordsInMessage.get(i) == wordsInMessage.get(j)){
+						toBeRemoved.add(wordsInMessage.get(i));
+					}
+				}
+			}
+
+			for(Word w : toBeRemoved){
+				wordsInMessage.remove(w);
+			}
+		}
 	}
 
 	public Assignment solve(){
 
-		return CSP_Backtracking(new Assignment());
+		return CSP_Backtracking(new Assignment(wordsInMessage));
 	}
 
 	public Assignment CSP_Backtracking(Assignment a){
@@ -45,6 +65,7 @@ public class SubstitutionCSP{
 
 		//TODO: Sort the domain using a least-constraining value heuristic
 		for(Character c : X.freeDomain()){
+			//System.out.println(X.cipherLetter + " = " + c);
 			a.assign(X.cipherLetter, c);
 
 			if(validAssignment(a)){
@@ -55,7 +76,7 @@ public class SubstitutionCSP{
 			}
 
 			a.unAssign(X.cipherLetter);
-
+			//System.out.println(X.cipherLetter + " != " + c);
 		}
 
 

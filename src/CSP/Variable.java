@@ -10,11 +10,18 @@ public class Variable {
 	public final char cipherLetter;
 	public Character plainLetter;
 	public Domain domain;
+	public List<Word> inWords;
 
-	public Variable(char cipherLetter, Character plainLetter){
+	public Variable(char cipherLetter, Character plainLetter, List<Word> listOfWords){
 		this.cipherLetter = cipherLetter;
 		this.plainLetter = plainLetter;
 		this.domain = new Domain(true);
+		this.inWords = new ArrayList<Word>();
+		for(Word w : listOfWords){
+			if(w.contains(cipherLetter)){
+				inWords.add(w);
+			}
+		}
 	}
 
 	public boolean assign(char plainLetter){
@@ -27,7 +34,7 @@ public class Variable {
 	}
 
 	public void unAssign(){
-		domain.makeAvailable(plainLetter);
+		domain.makeAvailable(cipherLetter, plainLetter);
 		plainLetter = null;
 
 	}

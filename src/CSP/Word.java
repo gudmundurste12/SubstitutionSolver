@@ -45,4 +45,23 @@ public class Word {
 
 		return numberOfDistinctCharacters;
 	}
+
+	public boolean contains(char letter){
+		for(char c : cipherWord){
+			if(c == letter){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object other){
+		if(other instanceof Word){
+			return ((Word)other).cipherWord == this.cipherWord;
+		}
+
+		return false;
+	}
 }

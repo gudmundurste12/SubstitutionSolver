@@ -11,35 +11,35 @@ import java.util.Map;
 public class Assignment {
 	private Map<Character, Variable> variables;
 
-	public Assignment(){
+	public Assignment(List<Word> listOfWords){
 		variables = new HashMap<Character, Variable>();
 
-		variables.put('A', new Variable('A', null));
-		variables.put('B', new Variable('B', null));
-		variables.put('C', new Variable('C', null));
-		variables.put('D', new Variable('D', null));
-		variables.put('E', new Variable('E', null));
-		variables.put('F', new Variable('F', null));
-		variables.put('G', new Variable('G', null));
-		variables.put('H', new Variable('H', null));
-		variables.put('I', new Variable('I', null));
-		variables.put('J', new Variable('J', null));
-		variables.put('K', new Variable('K', null));
-		variables.put('L', new Variable('L', null));
-		variables.put('M', new Variable('M', null));
-		variables.put('N', new Variable('N', null));
-		variables.put('O', new Variable('O', null));
-		variables.put('P', new Variable('P', null));
-		variables.put('Q', new Variable('Q', null));
-		variables.put('R', new Variable('R', null));
-		variables.put('S', new Variable('S', null));
-		variables.put('T', new Variable('T', null));
-		variables.put('U', new Variable('U', null));
-		variables.put('V', new Variable('V', null));
-		variables.put('W', new Variable('W', null));
-		variables.put('X', new Variable('X', null));
-		variables.put('Y', new Variable('Y', null));
-		variables.put('Z', new Variable('Z', null));
+		variables.put('A', new Variable('A', null, listOfWords));
+		variables.put('B', new Variable('B', null, listOfWords));
+		variables.put('C', new Variable('C', null, listOfWords));
+		variables.put('D', new Variable('D', null, listOfWords));
+		variables.put('E', new Variable('E', null, listOfWords));
+		variables.put('F', new Variable('F', null, listOfWords));
+		variables.put('G', new Variable('G', null, listOfWords));
+		variables.put('H', new Variable('H', null, listOfWords));
+		variables.put('I', new Variable('I', null, listOfWords));
+		variables.put('J', new Variable('J', null, listOfWords));
+		variables.put('K', new Variable('K', null, listOfWords));
+		variables.put('L', new Variable('L', null, listOfWords));
+		variables.put('M', new Variable('M', null, listOfWords));
+		variables.put('N', new Variable('N', null, listOfWords));
+		variables.put('O', new Variable('O', null, listOfWords));
+		variables.put('P', new Variable('P', null, listOfWords));
+		variables.put('Q', new Variable('Q', null, listOfWords));
+		variables.put('R', new Variable('R', null, listOfWords));
+		variables.put('S', new Variable('S', null, listOfWords));
+		variables.put('T', new Variable('T', null, listOfWords));
+		variables.put('U', new Variable('U', null, listOfWords));
+		variables.put('V', new Variable('V', null, listOfWords));
+		variables.put('W', new Variable('W', null, listOfWords));
+		variables.put('X', new Variable('X', null, listOfWords));
+		variables.put('Y', new Variable('Y', null, listOfWords));
+		variables.put('Z', new Variable('Z', null, listOfWords));
 	}
 
 	public Variable get(char cipherLetter){
@@ -50,7 +50,7 @@ public class Assignment {
 		Variable v = get(cipherLetter);
 		if(v.assign(plainLetter)){
 			for(Variable var : unassignedVariables()){
-				var.domain.makeUnavailable(plainLetter);
+				var.domain.makeUnavailable(cipherLetter, plainLetter);
 			}
 
 			return true;
@@ -62,7 +62,12 @@ public class Assignment {
 	}
 
 	public void unAssign(char cipherLetter){
-		get(cipherLetter).unAssign();
+		Variable theVariable = get(cipherLetter);
+		char plainLetter = theVariable.plainLetter;
+		theVariable.unAssign();
+		for(Variable var : variables.values()){
+			var.domain.makeAvailable(cipherLetter, plainLetter);
+		}
 	}
 
 	public boolean complete(){
@@ -131,13 +136,10 @@ public class Assignment {
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
-		System.out.println("Building");
 		for(Variable var : variables.values()){
-			System.out.println("Adding variable");
 			builder.append(var);
 			builder.append("\r\n");
 		}
-		System.out.println("Done building");
 
 		return builder.toString();
 	}
