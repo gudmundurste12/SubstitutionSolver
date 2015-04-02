@@ -7,11 +7,12 @@ import java.util.List;
  * Created by Gvendurst on 15.3.2015.
  */
 public class Variable {
-	//TODO: Add cipherletter here. Too much indirect dependency on Assignment here.
+	public final char cipherLetter;
 	public Character plainLetter;
 	public Domain domain;
 
-	public Variable(Character plainLetter){
+	public Variable(char cipherLetter, Character plainLetter){
+		this.cipherLetter = cipherLetter;
 		this.plainLetter = plainLetter;
 		this.domain = new Domain(true);
 	}

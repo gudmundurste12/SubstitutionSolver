@@ -14,32 +14,32 @@ public class Assignment {
 	public Assignment(){
 		variables = new HashMap<Character, Variable>();
 
-		variables.put('A', new Variable(null));
-		variables.put('B', new Variable(null));
-		variables.put('C', new Variable(null));
-		variables.put('D', new Variable(null));
-		variables.put('E', new Variable(null));
-		variables.put('F', new Variable(null));
-		variables.put('G', new Variable(null));
-		variables.put('H', new Variable(null));
-		variables.put('I', new Variable(null));
-		variables.put('J', new Variable(null));
-		variables.put('K', new Variable(null));
-		variables.put('L', new Variable(null));
-		variables.put('M', new Variable(null));
-		variables.put('N', new Variable(null));
-		variables.put('O', new Variable(null));
-		variables.put('P', new Variable(null));
-		variables.put('Q', new Variable(null));
-		variables.put('R', new Variable(null));
-		variables.put('S', new Variable(null));
-		variables.put('T', new Variable(null));
-		variables.put('U', new Variable(null));
-		variables.put('V', new Variable(null));
-		variables.put('W', new Variable(null));
-		variables.put('X', new Variable(null));
-		variables.put('Y', new Variable(null));
-		variables.put('Z', new Variable(null));
+		variables.put('A', new Variable('A', null));
+		variables.put('B', new Variable('B', null));
+		variables.put('C', new Variable('C', null));
+		variables.put('D', new Variable('D', null));
+		variables.put('E', new Variable('E', null));
+		variables.put('F', new Variable('F', null));
+		variables.put('G', new Variable('G', null));
+		variables.put('H', new Variable('H', null));
+		variables.put('I', new Variable('I', null));
+		variables.put('J', new Variable('J', null));
+		variables.put('K', new Variable('K', null));
+		variables.put('L', new Variable('L', null));
+		variables.put('M', new Variable('M', null));
+		variables.put('N', new Variable('N', null));
+		variables.put('O', new Variable('O', null));
+		variables.put('P', new Variable('P', null));
+		variables.put('Q', new Variable('Q', null));
+		variables.put('R', new Variable('R', null));
+		variables.put('S', new Variable('S', null));
+		variables.put('T', new Variable('T', null));
+		variables.put('U', new Variable('U', null));
+		variables.put('V', new Variable('V', null));
+		variables.put('W', new Variable('W', null));
+		variables.put('X', new Variable('X', null));
+		variables.put('Y', new Variable('Y', null));
+		variables.put('Z', new Variable('Z', null));
 	}
 
 	public Variable get(char cipherLetter){
