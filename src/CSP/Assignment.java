@@ -50,12 +50,13 @@ public class Assignment {
 		Variable v = get(cipherLetter);
 		if(v.assign(plainLetter)){
 			for(Variable var : unassignedVariables()){
-				var.domain.makeAvailable(plainLetter);
+				var.domain.makeUnavailable(plainLetter);
 			}
 
 			return true;
 		}
-		else {
+		else
+		{
 			return false;
 		}
 	}
