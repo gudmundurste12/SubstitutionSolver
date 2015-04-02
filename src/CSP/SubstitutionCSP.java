@@ -12,6 +12,7 @@ public class SubstitutionCSP{
 	private String encryptedMessage;
 	private String[] wordsInMessage;
 
+
 	private static DomainSizeComparator domainSizeComparator;
 
 	public SubstitutionCSP(Dictionary dictionary, String encryptedMessage){
@@ -42,8 +43,16 @@ public class SubstitutionCSP{
 
 		//TODO: Sort the domain using a least-constraining value heuristic
 		for(Character c : X.freeDomain()){
-			X.assign(c);
+			a.assign(X.cipherLetter, c);
 
+			if(validAssignment(a)){
+				Assignment result = CSP_Backtracking(a);
+				if(result != null){
+					return result;
+				}
+			}
+
+			a.unAssign(X.cipherLetter);
 
 		}
 
@@ -62,8 +71,11 @@ public class SubstitutionCSP{
 	public boolean validAssignment(Assignment a){
 		for(String word : wordsInMessage){
 			if(word != null){
-				if(!dictionary.contains(word)){
-					return false;
+				String decrypted = a.decrypt(word);
+				if(decrypted != null) {
+					if (!dictionary.contains(decrypted)) {
+						return false;
+					}
 				}
 			}
 		}

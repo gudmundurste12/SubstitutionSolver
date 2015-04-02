@@ -20,10 +20,17 @@ public class Variable {
 	public boolean assign(char plainLetter){
 		if(domain.available(plainLetter)){
 			this.plainLetter = plainLetter;
+			//TODO: Make unavailable for other variables
 			return true;
 		}
 
 		return false;
+	}
+
+	public void unAssign(){
+		domain.makeAvailable(plainLetter);
+		plainLetter = null;
+
 	}
 
 	public List<Character> freeDomain(){
@@ -35,5 +42,15 @@ public class Variable {
 		}
 
 		return returnValue;
+	}
+
+	@Override
+	public String toString(){
+		if(plainLetter != null){
+			return cipherLetter + ": " + plainLetter;
+		}
+		else{
+			return cipherLetter + ": unassigned";
+		}
 	}
 }

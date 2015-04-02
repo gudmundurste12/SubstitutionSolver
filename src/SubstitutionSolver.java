@@ -36,7 +36,13 @@ public class SubstitutionSolver {
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
+		long timeStarted = System.nanoTime();
+
 		SubstitutionCSP csp = new SubstitutionCSP(dictionary, encryptedMessage);
+		System.out.println(csp.solve());
+
+		long time = (System.nanoTime() - timeStarted) / 1000000000;
+		System.out.println("Solution found in : " + time + "seconds");
 	}
 
 	//TODO: Add real support for multiline text

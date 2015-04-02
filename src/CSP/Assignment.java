@@ -48,7 +48,20 @@ public class Assignment {
 
 	public boolean assign(char cipherLetter, char plainLetter){
 		Variable v = get(cipherLetter);
-		return v.assign(plainLetter);
+		if(v.assign(plainLetter)){
+			for(Variable var : unassignedVariables()){
+				var.domain.makeAvailable(plainLetter);
+			}
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void unAssign(char cipherLetter){
+		get(cipherLetter).unAssign();
 	}
 
 	public boolean complete(){
@@ -90,5 +103,19 @@ public class Assignment {
 
 
 		return returnValue;
+	}
+
+	@Override
+	public String toString(){
+		StringBuilder builder = new StringBuilder();
+		System.out.println("Building");
+		for(Variable var : variables.values()){
+			System.out.println("Adding variable");
+			builder.append(var);
+			builder.append("\r\n");
+		}
+		System.out.println("Done building");
+
+		return builder.toString();
 	}
 }
