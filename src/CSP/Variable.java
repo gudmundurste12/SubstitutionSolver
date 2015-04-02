@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Gvendurst on 15.3.2015.
  */
-public class Variable {
+public class Variable{
 	public final char cipherLetter;
 	public Character plainLetter;
 	public Domain domain;
@@ -48,6 +48,10 @@ public class Variable {
 		}
 
 		return returnValue;
+	}
+
+	public int mostConstrainedHeuristic(){
+		return domain.domainSize() * inWords.size();
 	}
 
 	@Override
