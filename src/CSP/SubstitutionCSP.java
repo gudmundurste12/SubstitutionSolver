@@ -1,7 +1,6 @@
 package CSP;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
 public class SubstitutionCSP{
 	private Dictionary dictionary;
 	private String encryptedMessage;
-	private String[] wordsInMessage;
+	private List<Word> wordsInMessage;
 
 
 	private static DomainSizeComparator domainSizeComparator;
@@ -18,7 +17,10 @@ public class SubstitutionCSP{
 	public SubstitutionCSP(Dictionary dictionary, String encryptedMessage){
 		this.dictionary = dictionary;
 		this.encryptedMessage = encryptedMessage;
-		this.wordsInMessage = encryptedMessage.split(" ");
+		this.wordsInMessage = new ArrayList<Word>();
+		for(String s : encryptedMessage.split(" ")){
+			wordsInMessage.add(new Word(s));
+		}
 		domainSizeComparator = new DomainSizeComparator();
 	}
 
@@ -69,13 +71,11 @@ public class SubstitutionCSP{
 	}
 
 	public boolean validAssignment(Assignment a){
-		for(String word : wordsInMessage){
+		for(Word word : wordsInMessage){
 			if(word != null){
-				String decrypted = a.decrypt(word);
-				if(decrypted != null) {
-					if (!dictionary.contains(decrypted)) {
-						return false;
-					}
+				ValidStatus valid = word.valid(a, dictionary);
+				if(valid == ValidStatus.INVALID){
+					return false;
 				}
 			}
 		}

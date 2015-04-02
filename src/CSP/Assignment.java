@@ -79,6 +79,7 @@ public class Assignment {
 	 * @param encrypted The encrypted string
 	 * @return The decrypted string or null, if a character could not be decryted.
 	 */
+	/*
 	public String decrypt(String encrypted){
 		String returnValue = "";
 
@@ -92,6 +93,27 @@ public class Assignment {
 
 		return returnValue;
 	}
+	*/
+
+	/**
+	 * Decrypts a string if possible.
+	 * @param encrypted The encrypted string
+	 * @return The decrypted string or null, if a character could not be decryted.
+	 */
+	public String decrypt(char[] encrypted){
+		String returnValue = "";
+
+		for(char c : encrypted){
+			Character current = variables.get(c).plainLetter;
+			if(current == null){
+				return null;
+			}
+			returnValue += current;
+		}
+
+		return returnValue;
+	}
+
 
 	public List<Variable> unassignedVariables(){
 		List<Variable> returnValue = new ArrayList<Variable>();
