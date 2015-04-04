@@ -11,6 +11,8 @@ public class SubstitutionCSP{
 	private String encryptedMessage;
 	private List<Word> wordsInMessage;
 
+	private List<String> decryptedMessages;
+
 
 	private static DomainSizeComparator domainSizeComparator;
 	private static MostConstrainedVariableHeuristic mostConstrainedVariableHeuristic;
@@ -20,6 +22,7 @@ public class SubstitutionCSP{
 		this.dictionary = dictionary;
 		this.encryptedMessage = encryptedMessage;
 		this.wordsInMessage = new ArrayList<Word>();
+		this.decryptedMessages = new ArrayList<String>();
 		for(String s : encryptedMessage.split(" ")){
 			wordsInMessage.add(new Word(s));
 		}
@@ -55,7 +58,23 @@ public class SubstitutionCSP{
 
 	public Assignment CSP_Backtracking(Assignment a){
 		if(a.complete()){
-			return a;
+			StringBuilder build = new StringBuilder();
+			for(String word : encryptedMessage.split(" ")){
+				build.append(a.decrypt(word.toCharArray()) + " ");
+			}
+
+			String decrypted = build.toString();
+
+			//We have found a new solution
+			if(!decryptedMessages.contains(decrypted)) {
+				decryptedMessages.add(decrypted);
+
+				System.out.println(a);
+				System.out.println(decrypted);
+			}
+
+			//return a;
+			return null;
 		}
 
 
