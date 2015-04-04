@@ -27,6 +27,9 @@ public class Variable{
 	public boolean assign(char plainLetter){
 		if(domain.available(plainLetter)){
 			this.plainLetter = plainLetter;
+			for(Word w : inWords){
+				w.decrementNumberOfCharactersLeft();
+			}
 			return true;
 		}
 
@@ -35,6 +38,9 @@ public class Variable{
 
 	public void unAssign(){
 		domain.makeAvailable(cipherLetter, plainLetter);
+		for(Word w : inWords){
+			w.incrementNumberOfCharactersLeft();
+		}
 		plainLetter = null;
 
 	}
@@ -52,6 +58,15 @@ public class Variable{
 
 	public int mostConstrainedHeuristic(){
 		return domain.domainSize() * inWords.size();
+	}
+
+	public int wordHeuristic(){
+		int returnValue = Integer.MAX_VALUE;
+		for(Word w : inWords){
+			returnValue = Math.min(returnValue, w.heuristic());
+		}
+
+		return returnValue;
 	}
 
 	@Override

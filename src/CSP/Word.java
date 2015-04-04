@@ -6,6 +6,7 @@ package CSP;
 public class Word {
 	public final char[] cipherWord;
 	private int numberOfDistinctCharacters;
+	private int numberOfCharactersLeft;
 
 	public Word(String cipherWord){
 		this.cipherWord = cipherWord.toCharArray();
@@ -24,6 +25,8 @@ public class Word {
 				numberOfDistinctCharacters++;
 			}
 		}
+
+		numberOfCharactersLeft = numberOfDistinctCharacters;
 	}
 
 	public ValidStatus valid(Assignment a, Dictionary d){
@@ -40,10 +43,24 @@ public class Word {
 		return ValidStatus.UNDECIDED;
 	}
 
+	public void incrementNumberOfCharactersLeft(){
+		numberOfCharactersLeft++;
+		if(numberOfCharactersLeft > numberOfDistinctCharacters){
+			System.out.println("Too many characters left");
+		}
+	}
+
+	public void decrementNumberOfCharactersLeft(){
+		numberOfCharactersLeft--;
+		if(numberOfCharactersLeft < 0){
+			System.out.println("Too few characters left");
+		}
+	}
+
 	public int heuristic(){
 
 
-		return numberOfDistinctCharacters;
+		return numberOfCharactersLeft;
 	}
 
 	public boolean contains(char letter){

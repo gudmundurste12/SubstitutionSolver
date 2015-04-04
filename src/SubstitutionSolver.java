@@ -42,7 +42,7 @@ public class SubstitutionSolver {
 		CSP.Assignment theAssignment = csp.solve();
 
 		long time = (System.nanoTime() - timeStarted) / 1000000000;
-		System.out.println("Solution found in : " + time + "seconds");
+		System.out.println("Solution found in : " + time + " seconds");
 
 		System.out.println(theAssignment);
 

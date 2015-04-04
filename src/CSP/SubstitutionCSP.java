@@ -14,6 +14,7 @@ public class SubstitutionCSP{
 
 	private static DomainSizeComparator domainSizeComparator;
 	private static MostConstrainedVariableHeuristic mostConstrainedVariableHeuristic;
+	private static WordHeuristic wordHeuristic;
 
 	public SubstitutionCSP(Dictionary dictionary, String encryptedMessage){
 		this.dictionary = dictionary;
@@ -27,6 +28,7 @@ public class SubstitutionCSP{
 
 		domainSizeComparator = new DomainSizeComparator();
 		mostConstrainedVariableHeuristic = new MostConstrainedVariableHeuristic();
+		wordHeuristic = new WordHeuristic();
 	}
 
 	private void trimWordsInMessage(){
@@ -60,6 +62,7 @@ public class SubstitutionCSP{
 		List<Variable> variablesLeft = a.unassignedVariables();
 		//Most constrained variable heuristic
 		variablesLeft.sort(mostConstrainedVariableHeuristic);
+		variablesLeft.sort(wordHeuristic);
 
 		//Will never be null because of how the algorithm is structured
 		Variable X = variablesLeft.get(0);
