@@ -36,6 +36,18 @@ public class SubstitutionSolver {
 		populateDictionary(dictionaryPath + "/english3.txt");
 		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 
+		/*
+		for(String s : encryptedMessage.split(" ")){
+			if(dictionary.contains(s)){
+				System.out.println("Dictionary contains " + s);
+			}
+			else{
+				System.out.println("Dictionary does not contain " + s);
+			}
+		}
+		*/
+
+
 		long timeStarted = System.nanoTime();
 
 		SubstitutionCSP csp = new SubstitutionCSP(dictionary, encryptedMessage);
