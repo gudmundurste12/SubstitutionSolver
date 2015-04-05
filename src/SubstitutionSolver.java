@@ -2,6 +2,7 @@ import CSP.Dictionary;
 import CSP.SubstitutionCSP;
 
 import java.io.*;
+import java.nio.file.Path;
 
 /**
  * Created by Gvendurst on 9.3.2015.
@@ -11,6 +12,7 @@ public class SubstitutionSolver {
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
 	private static boolean findAll = false;
+	private static String messageName;
 
 	private static String encryptedMessage;
 
@@ -22,7 +24,9 @@ public class SubstitutionSolver {
 			System.exit(1);
 		}
 
-		retrieveMessage(messagePath + "/" + args[0]);
+		messageName = args[0];
+
+		retrieveMessage(messagePath + "/" + messageName);
 
 		System.out.println(encryptedMessage + "\r\n");
 
@@ -44,18 +48,41 @@ public class SubstitutionSolver {
 			long time = (System.nanoTime() - timeStarted) / 1000000000;
 			System.out.println("Solution found in : " + time + " second(s)");
 
-			System.out.println(theAssignment);
-
-			System.out.println(theAssignment.inverseString());
-
 			StringBuilder build = new StringBuilder();
 
 			for(char c : encryptedMessage.toCharArray()){
 				build.append(theAssignment.decrypt(c));
 			}
 
-			System.out.println(build.toString());
+			String decryptedMessage = build.toString();
+
+			System.out.println(decryptedMessage);
+
+			writeToFile(getFileName("_solved"), decryptedMessage);
+			writeToFile(getFileName("_cipher_decryption"),  theAssignment.toString());
+			writeToFile(getFileName("_cipher_encryption"),  theAssignment.inverseString());
 		}
+	}
+
+	private static String getFileName(String addition){
+		String path = messagePath + "/" + messageName;
+
+		String returnValue;
+
+		if(hasFileExtention(path)){
+			returnValue = path.substring(0, path.lastIndexOf('.'));
+			String extension = path.substring(path.lastIndexOf('.'), path.length());
+			returnValue = returnValue + addition + extension;
+		}
+		else{
+			returnValue = path + addition;
+		}
+
+		return returnValue;
+	}
+
+	private static boolean hasFileExtention(String fileName){
+		return fileName.matches(".*[.][a-z,A-Z]+");
 	}
 
 	private static void retrieveMessage(String fileName){
@@ -131,6 +158,25 @@ public class SubstitutionSolver {
 		}
 		else{
 			System.out.println(dirName + " is not a directory");
+		}
+	}
+
+	private static void writeToFile(String fileName, String message){
+		try {
+			File outFile = new File(fileName);
+			if(outFile.exists()){
+				outFile.delete();
+			}
+
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+
+			bw.write(message);
+			bw.flush();
+			bw.close();
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+			System.exit(1);
 		}
 	}
 }
