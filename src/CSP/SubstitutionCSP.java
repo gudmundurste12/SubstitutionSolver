@@ -63,12 +63,7 @@ public class SubstitutionCSP{
 		if(a.complete()){
 			if(findAll){
 				StringBuilder build = new StringBuilder();
-				//TODO: Change the split
-				/*
-				for(String word : encryptedMessage.split(" ")){
-					build.append(a.decrypt(word.toCharArray()) + " ");
-				}
-				*/
+
 				for(char c : encryptedMessage.toCharArray()){
 					build.append(a.decrypt(c));
 				}
@@ -138,13 +133,6 @@ public class SubstitutionCSP{
 
 
 		return null;
-	}
-
-	public List<Character> sortDomain(Domain d){
-		List<Character> returnValue = new ArrayList<Character>();
-
-
-		return returnValue;
 	}
 
 	public boolean validAssignment(Assignment a){

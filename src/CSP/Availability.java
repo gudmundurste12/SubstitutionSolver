@@ -11,8 +11,4 @@ public class Availability {
 		available = true;
 		deletedBy = null;
 	}
-
-	public Availability(boolean available){
-		this.available = available;
-	}
 }

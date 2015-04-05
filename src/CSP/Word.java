@@ -60,7 +60,6 @@ public class Word {
 	}
 
 	public double heuristic(){
-		//TODO: Improve the heuristic. Make it a double?
 		double returnValue = numberOfCharactersLeft;
 
 		double upper = longestWord - numberOfDistinctCharacters;
@@ -69,7 +68,6 @@ public class Word {
 		double lerp = upper / lower;
 
 		return returnValue + lerp;
-		//return (longestWord - numberOfDistinctCharacters) + numberOfCharactersLeft;
 	}
 
 	public boolean contains(char letter){
