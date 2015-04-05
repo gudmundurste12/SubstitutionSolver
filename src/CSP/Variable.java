@@ -11,6 +11,7 @@ public class Variable{
 	public Character plainLetter;
 	public Domain domain;
 	public List<Word> inWords;
+	private static int totalWords;
 
 	public Variable(char cipherLetter, Character plainLetter, List<Word> listOfWords){
 		this.cipherLetter = cipherLetter;
@@ -18,9 +19,11 @@ public class Variable{
 		this.domain = new Domain(true);
 		this.inWords = new ArrayList<Word>();
 
+		totalWords = listOfWords.size();
 		for(Word w : listOfWords){
 			if(w.contains(cipherLetter)){
 				inWords.add(w);
+
 			}
 		}
 
@@ -63,7 +66,7 @@ public class Variable{
 	}
 
 	public int mostConstrainedHeuristic(){
-		return domain.domainSize() * inWords.size();
+		return domain.domainSize() * (totalWords - inWords.size() + 1);
 	}
 
 	public int wordHeuristic(){

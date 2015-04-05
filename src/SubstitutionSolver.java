@@ -11,7 +11,7 @@ public class SubstitutionSolver {
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
 	private static AssignmentSet caesar3;
-	private static boolean findAll = true;
+	private static boolean findAll = false;
 
 	private static String encryptedMessage;
 

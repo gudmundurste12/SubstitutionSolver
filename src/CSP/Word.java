@@ -7,6 +7,7 @@ public class Word {
 	public final char[] cipherWord;
 	private int numberOfDistinctCharacters;
 	private int numberOfCharactersLeft;
+	private static int longestWord = 0;
 
 	public Word(String cipherWord){
 		this.cipherWord = cipherWord.toCharArray();
@@ -27,6 +28,7 @@ public class Word {
 		}
 
 		numberOfCharactersLeft = numberOfDistinctCharacters;
+		longestWord = Math.max(longestWord, numberOfCharactersLeft);
 	}
 
 	public ValidStatus valid(Assignment a, Dictionary d){
@@ -58,9 +60,7 @@ public class Word {
 	}
 
 	public int heuristic(){
-
-
-		return numberOfCharactersLeft;
+		return (longestWord - numberOfDistinctCharacters) + numberOfCharactersLeft;
 	}
 
 	public boolean contains(char letter){
