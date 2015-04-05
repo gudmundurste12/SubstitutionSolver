@@ -78,6 +78,15 @@ public class Variable{
 		return returnValue;
 	}
 
+	public String inverseString(){
+		if(plainLetter != null){
+			return plainLetter + ": " + cipherLetter;
+		}
+		else{
+			return plainLetter + ": unassigned";
+		}
+	}
+
 	@Override
 	public String toString(){
 		if(plainLetter != null){

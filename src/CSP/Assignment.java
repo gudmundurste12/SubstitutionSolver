@@ -1,9 +1,6 @@
 package CSP;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Gvendurst on 22.3.2015.
@@ -80,26 +77,24 @@ public class Assignment {
 		return true;
 	}
 
-	/**
-	 * Decrypts a string if possible.
-	 * @param encrypted The encrypted string
-	 * @return The decrypted string or null, if a character could not be decryted.
-	 */
-	/*
-	public String decrypt(String encrypted){
-		String returnValue = "";
+	public String inverseString(){
+		StringBuilder builder = new StringBuilder();
 
-		for(char c : encrypted.toCharArray()){
-			Character current = variables.get(c).plainLetter;
-			if(current == null){
-				return null;
-			}
-			returnValue += current;
+		for(Variable var : variablesByPlainLetter()){
+			builder.append(var.inverseString());
+			builder.append("\r\n");
 		}
+
+		return builder.toString();
+	}
+
+	private List<Variable> variablesByPlainLetter(){
+		List<Variable> returnValue = new ArrayList<Variable>(variables.values());
+
+		Collections.sort(returnValue, new PlainLetterComparator());
 
 		return returnValue;
 	}
-	*/
 
 	/**
 	 * Decrypts a string if possible.
