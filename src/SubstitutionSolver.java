@@ -25,7 +25,7 @@ public class SubstitutionSolver {
 
 		retrieveMessage(messagePath + "/" + args[0]);
 
-		System.out.println(encryptedMessage);
+		System.out.println(encryptedMessage + "\r\n");
 
 		if(args.length > 1){
 			userSpecified = "/" + args[1];
@@ -60,8 +60,14 @@ public class SubstitutionSolver {
 			System.out.println(theAssignment);
 
 			StringBuilder build = new StringBuilder();
+			//TODO: Change the split
+			/*
 			for (String word : encryptedMessage.split(" ")) {
 				build.append(theAssignment.decrypt(word.toCharArray()) + " ");
+			}
+			*/
+			for(char c : encryptedMessage.toCharArray()){
+				build.append(theAssignment.decrypt(c));
 			}
 
 			System.out.println(build.toString());
@@ -76,9 +82,14 @@ public class SubstitutionSolver {
 			StringBuilder builder = new StringBuilder();
 
 			String line;
+			boolean first = true;
 			try{
 				while ((line = br.readLine()) != null) {
+					if(!first){
+						builder.append("\r\n");
+					}
 					builder.append(line.toUpperCase());
+					first = false;
 				}
 
 				encryptedMessage = builder.toString();

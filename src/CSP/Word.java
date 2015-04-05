@@ -59,8 +59,17 @@ public class Word {
 		}
 	}
 
-	public int heuristic(){
-		return (longestWord - numberOfDistinctCharacters) + numberOfCharactersLeft;
+	public double heuristic(){
+		//TODO: Improve the heuristic. Make it a double?
+		double returnValue = numberOfCharactersLeft;
+
+		double upper = longestWord - numberOfDistinctCharacters;
+		double lower = longestWord - numberOfCharactersLeft + 1;
+
+		double lerp = upper / lower;
+
+		return returnValue + lerp;
+		//return (longestWord - numberOfDistinctCharacters) + numberOfCharactersLeft;
 	}
 
 	public boolean contains(char letter){

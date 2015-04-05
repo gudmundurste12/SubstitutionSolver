@@ -26,7 +26,7 @@ public class SubstitutionCSP{
 		this.encryptedMessage = encryptedMessage;
 		this.wordsInMessage = new ArrayList<Word>();
 		this.decryptedMessages = new ArrayList<String>();
-		for(String s : encryptedMessage.split(" ")){
+		for(String s : encryptedMessage.split("\\s*[^A-Z]+")){
 			wordsInMessage.add(new Word(s));
 		}
 
@@ -63,8 +63,14 @@ public class SubstitutionCSP{
 		if(a.complete()){
 			if(findAll){
 				StringBuilder build = new StringBuilder();
+				//TODO: Change the split
+				/*
 				for(String word : encryptedMessage.split(" ")){
 					build.append(a.decrypt(word.toCharArray()) + " ");
+				}
+				*/
+				for(char c : encryptedMessage.toCharArray()){
+					build.append(a.decrypt(c));
 				}
 
 				String decrypted = build.toString();

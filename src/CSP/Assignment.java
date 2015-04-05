@@ -120,6 +120,16 @@ public class Assignment {
 		return returnValue;
 	}
 
+	public char decrypt(char encrypted){
+		Variable current = variables.get(encrypted);
+		if(current != null){
+			return current.plainLetter;
+		}
+		else{
+			return encrypted;
+		}
+	}
+
 
 	public List<Variable> unassignedVariables(){
 		List<Variable> returnValue = new ArrayList<Variable>();

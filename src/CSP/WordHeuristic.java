@@ -13,8 +13,8 @@ public class WordHeuristic implements Comparator<Variable> {
 	 * Returns 1 if o1 is greater than o2
 	 */
 	public int compare(Variable o1, Variable o2) {
-		int h1 = o1.wordHeuristic();
-		int h2 = o2.wordHeuristic();
+		double h1 = o1.wordHeuristic();
+		double h2 = o2.wordHeuristic();
 		if(h1 < h2){
 			return -1;
 		}

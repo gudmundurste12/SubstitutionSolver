@@ -69,8 +69,8 @@ public class Variable{
 		return domain.domainSize() * (totalWords - inWords.size() + 1);
 	}
 
-	public int wordHeuristic(){
-		int returnValue = Integer.MAX_VALUE;
+	public double wordHeuristic(){
+		double returnValue = Integer.MAX_VALUE;
 		for(Word w : inWords){
 			returnValue = Math.min(returnValue, w.heuristic());
 		}
