@@ -11,6 +11,7 @@ public class SubstitutionSolver {
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
 	private static AssignmentSet caesar3;
+	private static boolean findAll = true;
 
 	private static String encryptedMessage;
 
@@ -51,19 +52,20 @@ public class SubstitutionSolver {
 		long timeStarted = System.nanoTime();
 
 		SubstitutionCSP csp = new SubstitutionCSP(dictionary, encryptedMessage);
-		CSP.Assignment theAssignment = csp.solve();
+		CSP.Assignment theAssignment = csp.solve(findAll);
+		if(theAssignment != null) {
+			long time = (System.nanoTime() - timeStarted) / 1000000000;
+			System.out.println("Solution found in : " + time + " seconds");
 
-		long time = (System.nanoTime() - timeStarted) / 1000000000;
-		System.out.println("Solution found in : " + time + " seconds");
+			System.out.println(theAssignment);
 
-		System.out.println(theAssignment);
+			StringBuilder build = new StringBuilder();
+			for (String word : encryptedMessage.split(" ")) {
+				build.append(theAssignment.decrypt(word.toCharArray()) + " ");
+			}
 
-		StringBuilder build = new StringBuilder();
-		for(String word : encryptedMessage.split(" ")){
-			build.append(theAssignment.decrypt(word.toCharArray()) + " ");
+			System.out.println(build.toString());
 		}
-
-		System.out.println(build.toString());
 	}
 
 	//TODO: Add real support for multiline text

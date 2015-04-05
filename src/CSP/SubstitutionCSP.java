@@ -1,5 +1,8 @@
 package CSP;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,30 +54,53 @@ public class SubstitutionCSP{
 		}
 	}
 
-	public Assignment solve(){
+	public Assignment solve(boolean findAll){
 
-		return CSP_Backtracking(new Assignment(wordsInMessage));
+		return CSP_Backtracking(new Assignment(wordsInMessage), findAll);
 	}
 
-	public Assignment CSP_Backtracking(Assignment a){
+	public Assignment CSP_Backtracking(Assignment a, boolean findAll){
 		if(a.complete()){
-			StringBuilder build = new StringBuilder();
-			for(String word : encryptedMessage.split(" ")){
-				build.append(a.decrypt(word.toCharArray()) + " ");
+			if(findAll){
+				StringBuilder build = new StringBuilder();
+				for(String word : encryptedMessage.split(" ")){
+					build.append(a.decrypt(word.toCharArray()) + " ");
+				}
+
+				String decrypted = build.toString();
+
+				//We have found a new solution
+				if(!decryptedMessages.contains(decrypted)) {
+					decryptedMessages.add(decrypted);
+
+					System.out.println(decrypted);
+
+					System.out.print("Do you want to keep searching(Y/N)? ");
+
+					BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+					String input;
+
+					try{
+						input = in.readLine();
+
+						if(input.toUpperCase().equals("Y")){
+							return null;
+						}
+						else{
+							return a;
+						}
+					}
+					catch(IOException e){
+						System.out.println(e.getMessage());
+						System.exit(1);
+					}
+				}
+
+				return null;
 			}
-
-			String decrypted = build.toString();
-
-			//We have found a new solution
-			if(!decryptedMessages.contains(decrypted)) {
-				decryptedMessages.add(decrypted);
-
-				System.out.println(a);
-				System.out.println(decrypted);
+			else{
+				return a;
 			}
-
-			//return a;
-			return null;
 		}
 
 
@@ -93,7 +119,7 @@ public class SubstitutionCSP{
 			a.assign(X.cipherLetter, c);
 
 			if(validAssignment(a)){
-				Assignment result = CSP_Backtracking(a);
+				Assignment result = CSP_Backtracking(a, findAll);
 				if(result != null){
 					return result;
 				}

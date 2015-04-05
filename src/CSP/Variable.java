@@ -17,10 +17,16 @@ public class Variable{
 		this.plainLetter = plainLetter;
 		this.domain = new Domain(true);
 		this.inWords = new ArrayList<Word>();
+
 		for(Word w : listOfWords){
 			if(w.contains(cipherLetter)){
 				inWords.add(w);
 			}
+		}
+
+		//This letter does not appear in the message, and should therefore not be examined
+		if(inWords.size() == 0){
+			this.plainLetter = '-';
 		}
 	}
 
