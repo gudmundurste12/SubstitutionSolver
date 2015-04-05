@@ -16,8 +16,6 @@ public class SubstitutionCSP{
 
 	private List<String> decryptedMessages;
 
-
-	private static DomainSizeComparator domainSizeComparator;
 	private static MostConstrainedVariableHeuristic mostConstrainedVariableHeuristic;
 	private static WordHeuristic wordHeuristic;
 
@@ -32,7 +30,6 @@ public class SubstitutionCSP{
 
 		trimWordsInMessage();
 
-		domainSizeComparator = new DomainSizeComparator();
 		mostConstrainedVariableHeuristic = new MostConstrainedVariableHeuristic();
 		wordHeuristic = new WordHeuristic();
 	}
