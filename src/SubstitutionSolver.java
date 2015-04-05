@@ -2,7 +2,7 @@ import CSP.Dictionary;
 import CSP.SubstitutionCSP;
 
 import java.io.*;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 /**
  * Created by Gvendurst on 9.3.2015.
@@ -11,6 +11,7 @@ public class SubstitutionSolver {
 	private static Dictionary dictionary;
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
+	private static String solutionPath = messagePath + "/solutions";
 	private static boolean findAll = false;
 	private static String messageName;
 
@@ -65,7 +66,7 @@ public class SubstitutionSolver {
 	}
 
 	private static String getFileName(String addition){
-		String path = messagePath + "/" + messageName;
+		String path = solutionPath + "/" + messageName;
 
 		String returnValue;
 
@@ -175,8 +176,12 @@ public class SubstitutionSolver {
 			bw.close();
 		}
 		catch(IOException e){
+			String newFileName = fileName.replace('/', '\\');
+			newFileName = newFileName.substring(0, newFileName.lastIndexOf('\\'));
+			File outFile = new File(newFileName);
+			outFile.mkdir();
 			System.out.println(e.getMessage());
-			System.exit(1);
+			writeToFile(fileName, message);
 		}
 	}
 }
