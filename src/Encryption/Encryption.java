@@ -29,9 +29,14 @@ public class Encryption {
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
 
 			String line;
+			boolean first = true;
 			try{
 				while ((line = br.readLine()) != null) {
+					if(!first){
+						builder.append("\r\n");
+					}
 					builder.append(line.toLowerCase());
+					first = false;
 				}
 			}
 			catch(IOException e){
