@@ -12,7 +12,7 @@ public class SubstitutionSolver {
 	private static String dictionaryPath = "res/dictionaries";
 	private static String messagePath = "res/messages";
 	private static String solutionPath = messagePath + "/solutions";
-	private static boolean findAll = false;
+	private static boolean findAll = true;
 	private static String messageName;
 
 	private static String encryptedMessage;
