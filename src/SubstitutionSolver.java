@@ -32,14 +32,40 @@ public class SubstitutionSolver {
 		System.out.println(encryptedMessage + "\r\n");
 
 		if(args.length > 1){
-			userSpecified = "/" + args[1];
+			for(int i = 1; i < args.length; i++){
+				if(args[i].equals("-a")){
+					findAll = true;
+				}
+				if(args[i].equals("-u")){
+					boolean valid = true;
+					if((i + 1) < args.length){
+						if(!args[i + 1].startsWith("-")) {
+							userSpecified = "/" + args[i + 1];
+							i++;
+						}
+						else{
+							valid = false;
+						}
+					}
+					else{
+						valid = false;
+					}
+
+					if(!valid){
+						System.out.println("Must specify a parameter for -u");
+						System.exit(1);
+					}
+				}
+			}
 		}
 
 		dictionary = new Dictionary();
 		populateDictionary(dictionaryPath + "/enable1.txt");
 		populateDictionary(dictionaryPath + "/english2.txt");
 		populateDictionary(dictionaryPath + "/english3.txt");
-		addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
+		if(!userSpecified.equals("")) {
+			addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
+		}
 
 		long timeStarted = System.nanoTime();
 
