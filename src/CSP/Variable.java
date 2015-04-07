@@ -67,7 +67,7 @@ public class Variable{
 	}
 
 	public int mostConstrainedHeuristic(){
-		return domain.domainSize() * (totalWords - inWords.size() + 1);
+		return totalWords - inWords.size();
 	}
 
 	public double wordHeuristic(){
