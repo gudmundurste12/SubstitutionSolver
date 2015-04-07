@@ -25,3 +25,19 @@ mean that the program will
 * decrypt message1.txt, located in res/messages.
 * search for new solutions until the user chooses to stop, or every solution has been found
 * use every file in res/dictionaries/userSpecified/profile1 as a list of valid words
+
+
+#How to encrypt messages
+Open the project in Intellij
+Create a run configuration using Encryption.Encryption as the main class.
+Set the program arguments as specified in the parameters section
+Run the program
+
+#Parameters for encryption
+The first parameter is the name of the file to be encrypted. 
+The second parameter is the name of the file containing the cipher that will be used.
+The third parameter is the name of the file in which the encrypted message should be written.
+
+
+##Note
+The program assumes that the files to be used are in the res/encryption directory
