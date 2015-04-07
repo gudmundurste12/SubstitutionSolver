@@ -90,6 +90,10 @@ public class SubstitutionSolver {
 			writeToFile(getFileName("_cipher_decryption"),  theAssignment.toString());
 			writeToFile(getFileName("_cipher_encryption"),  theAssignment.inverseString());
 		}
+		else{
+			long time = (System.nanoTime() - timeStarted) / 1000000000;
+			System.out.println("Search took : " + time + " second(s)");
+		}
 	}
 
 	private static String getFileName(String addition){
