@@ -13,7 +13,9 @@ The first parameter is the name of the file to be decrypted. The program assumes
 
 ##Optional
 Optional parameters are the following flags
+<br />
 -a: If this flag is not used the program will just find the first solution and stop searching. If this flag is used the user will be prompted whether or not he wants to keep searching after each new solution is found.
+<br />
 -u: Specify a profile to use. A profile is a directory in res/dictionaries/userSpecified. The program will read every file in the directory and read every line in them as a word that the program accepts as a valid word.
 
 ##Example
