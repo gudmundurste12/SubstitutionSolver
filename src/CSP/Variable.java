@@ -55,6 +55,7 @@ public class Variable{
 	}
 
 	public List<Character> freeDomain(){
+		//TODO: Sorting the domain would be done here, because domain.availability.keySet() is in alphabetical order by default
 		List<Character> returnValue = new ArrayList<Character>();
 		for(Character c : domain.availability.keySet()){
 			if(domain.availability.get(c).available){
