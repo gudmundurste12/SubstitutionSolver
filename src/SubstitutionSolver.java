@@ -66,6 +66,7 @@ public class SubstitutionSolver {
 		if(!userSpecified.equals("")) {
 			addUserSpecifiedWords(dictionaryPath + "/userSpecified" + userSpecified);
 		}
+		System.out.println();
 
 		long timeStarted = System.nanoTime();
 
