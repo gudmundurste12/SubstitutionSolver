@@ -1,5 +1,5 @@
 # SubstitutionSolver
-A program that solves substitution ciphers
+A program that solves substitution ciphers. After a solution has been found the results will be stored in res/messages/solutions
 
 #How to use
 Open the project in Intellij
