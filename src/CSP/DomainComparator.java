@@ -33,21 +33,10 @@ public class DomainComparator implements Comparator<Character> {
 		charValues.put('u', 19);
 		charValues.put('k', 20);
 		charValues.put('p', 21);
-
 		charValues.put('j', 22);
-
-
-
-
 		charValues.put('q', 23);
-
-
 		charValues.put('v', 24);
-
-
-
 		charValues.put('x', 25);
-
 		charValues.put('z', 26);
 		charValues.put('-', 9000);
 	}
