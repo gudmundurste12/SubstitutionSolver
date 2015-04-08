@@ -12,6 +12,7 @@ public class Variable{
 	public Domain domain;
 	public List<Word> inWords;
 	private static int totalWords;
+	private static DomainComparator domainComparator;
 
 	public Variable(char cipherLetter, Character plainLetter, List<Word> listOfWords){
 		this.cipherLetter = cipherLetter;
@@ -25,6 +26,10 @@ public class Variable{
 				inWords.add(w);
 
 			}
+		}
+
+		if(domainComparator == null){
+			domainComparator = new DomainComparator();
 		}
 
 		//This letter does not appear in the message, and should therefore not be examined
@@ -62,6 +67,8 @@ public class Variable{
 				returnValue.add(c);
 			}
 		}
+
+		returnValue.sort(domainComparator);
 
 		return returnValue;
 	}
